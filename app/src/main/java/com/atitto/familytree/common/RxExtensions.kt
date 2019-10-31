@@ -92,6 +92,6 @@ fun CompositeDisposable.makeAction(action: Completable, errorExecute: (Throwable
 }
 
 fun <T> PublishSubject<T>.subscribeWithDebounce(postExecute: (T) -> Unit) {
-            debounce(500, TimeUnit.MILLISECONDS)
+            debounce(800, TimeUnit.MILLISECONDS)
             .subscribe { postExecute.invoke(it) }
 }

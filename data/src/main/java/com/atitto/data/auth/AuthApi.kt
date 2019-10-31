@@ -3,7 +3,6 @@ package com.atitto.data.auth
 import com.atitto.data.network.NetworkContract
 import io.reactivex.Completable
 import retrofit2.http.Body
-import retrofit2.http.HEAD
 import retrofit2.http.POST
 
 interface AuthApi {

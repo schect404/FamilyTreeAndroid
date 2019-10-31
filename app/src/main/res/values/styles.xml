@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="TextAccentAppearenceSmall" parent="TextSmall">
@@ -43,7 +44,7 @@
 
     <style name="TextErrorAppearance" parent="TextAppearance.Design.Error">
         <item name="android:textColor">@color/errorRed</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/textSmallSize</item>
     </style>
 
     <style name="GreenRoundedButton" parent="@style/Widget.AppCompat.Button">
@@ -81,6 +82,7 @@
     <style name="TextInputTheme" parent="Widget.Design.TextInputLayout">
         <item name="android:singleLine">true</item>
         <item name="errorTextAppearance">@style/TextErrorAppearance</item>
+        <item name="android:textSize">@dimen/textMiddleSmallSize</item>
         <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
         <item name="counterOverflowTextAppearance">@style/TextAppearance.Design.Counter.Overflow</item>
     </style>

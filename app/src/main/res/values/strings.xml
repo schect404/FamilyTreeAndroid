@@ -14,4 +14,9 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="tree_transition">treeTransition</string>
+    <string name="email_transition">emailTransition</string>
+    <string name="password_transition">passwordTransition</string>
+    <string name="name_transition">titleTransition</string>
+    <string name="btn_transition">btnTransition</string>
 </resources>

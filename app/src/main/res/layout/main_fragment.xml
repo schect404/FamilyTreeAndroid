@@ -11,14 +11,15 @@
     tools:context=".presentation.signin.SignInFragment">
 
     <ImageView
-        android:id="@+id/ivTree"
+        android:id="@+id/ivTree_1"
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/logo_tree"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="75dp"/>
+        android:layout_marginTop="75dp"
+        android:transitionName="@string/tree_transition"/>
 
     <TextView
         android:id="@+id/tvSignIn"
@@ -26,16 +27,18 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivTree"
+        app:layout_constraintTop_toBottomOf="@id/ivTree_1"
         android:layout_marginTop="25dp"
         style="@style/TextLabelAppearenceBig"
-        android:text="@string/sign_in"/>
+        android:text="@string/sign_in"
+        android:transitionName="@string/name_transition"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/vEmailInput"
         app:layout_constraintTop_toBottomOf="@id/tvSignIn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:transitionName="@string/email_transition">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
@@ -49,12 +52,16 @@
         android:id="@+id/vPasswordInput"
         app:layout_constraintTop_toBottomOf="@id/vEmailInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorAccent"
+        android:transitionName="@string/password_transition">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="@string/password"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,10 +72,12 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
         style="@style/GreenRoundedButton"
+        android:enabled="false"
         android:layout_marginTop="@dimen/standartMargin"
         app:layout_constraintTop_toBottomOf="@id/vPasswordInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:transitionName="@string/btn_transition"/>
 
     <Button
         android:id="@+id/bForgot"

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.transition.TransitionInflater
 import com.atitto.domain.auth.Sex
 import com.atitto.domain.auth.SignUpModel
 import com.atitto.familytree.R
@@ -34,6 +35,10 @@ class SignUpFragment : BaseFragment() {
 
     private val viewModel: SignUpViewModel by kodein.instance()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bSignIn.setOnClickListener { navigator.goToSignIn() }
@@ -49,8 +54,8 @@ class SignUpFragment : BaseFragment() {
         viewModel.listenPassword()
         bindDataTo(viewModel.birthDateChangedLiveData) { actionWithButonHandling { dpBirth.setText(DateFormatter.defaultDateFormat.format(Date(it))) } }
         bindDataTo(viewModel.sexChangedLiveData) { actionWithButonHandling { etSex.setText(it.title) } }
-        bindDataTo(viewModel.emailErrorLiveData) { actionWithButonHandling { etEmail.error = context().resources.getString(it) } }
-        bindDataTo(viewModel.passwordErrorLiveData) { actionWithButonHandling { etPassword.error = context().resources.getString(it) } }
+        bindDataTo(viewModel.emailErrorLiveData) { actionWithButonHandling { vEmailInput.error = context().resources.getString(it) } }
+        bindDataTo(viewModel.passwordErrorLiveData) { actionWithButonHandling { vPasswordInput.error = context().resources.getString(it) } }
         bindDataTo(viewModel.shouldHandleButtonLiveData) { handleButtonAvailable() }
         bindDataTo(viewModel.signUpErrorLiveData) {
             bSignUp.isEnabled = true
@@ -71,12 +76,12 @@ class SignUpFragment : BaseFragment() {
 
     private fun registerTextListeners() {
         etEmail.textChangedListener {
-            etEmail.error = null
+            vEmailInput.error = null
             viewModel.changeEmail(it)
         }
 
         etPassword.textChangedListener {
-            etPassword.error = null
+            vPasswordInput.error = null
             viewModel.changePassword(it)
         }
         etFirstName.textChangedListener { handleButtonAvailable() }
@@ -119,8 +124,8 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun handleButtonAvailable() {
-        val isEmailValid = (!etEmail.text.isNullOrEmpty()).and(etEmail.error.isNullOrEmpty())
-        val isPasswordValid = (!etPassword.text.isNullOrEmpty()).and(etPassword.error.isNullOrEmpty())
+        val isEmailValid = (!etEmail.text.isNullOrEmpty()).and(vEmailInput.error.isNullOrEmpty())
+        val isPasswordValid = (!etPassword.text.isNullOrEmpty()).and(vPasswordInput.error.isNullOrEmpty())
         val areNamesValid = (!etFirstName.text.isNullOrEmpty()).and(!etLastName.text.isNullOrEmpty())
         val isOtherDataValid = (!dpBirth.text.isNullOrEmpty()).and(!etSex.text.isNullOrEmpty())
         bSignUp.isEnabled = isEmailValid.and(isPasswordValid).and(areNamesValid).and(isOtherDataValid)

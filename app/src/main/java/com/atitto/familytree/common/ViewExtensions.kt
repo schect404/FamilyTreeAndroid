@@ -13,3 +13,15 @@ fun View.gone() {
 fun View.visibleIf(predicate: () -> Boolean) {
     visibility = if(predicate()) View.VISIBLE else View.GONE
 }
+
+fun View.enable() {
+    isEnabled = true
+}
+
+fun View.disable() {
+    isEnabled = false
+}
+
+fun View.enableIf(predicate: () -> Boolean) {
+    isEnabled = predicate()
+}

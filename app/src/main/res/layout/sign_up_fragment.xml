@@ -17,10 +17,11 @@
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/logo_tree"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="25dp"
+        android:transitionName="@string/tree_transition"/>
 
     <TextView
-        android:id="@+id/tvSignUp"
+        android:id="@+id/tvSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,17 +29,20 @@
         app:layout_constraintTop_toBottomOf="@id/ivTree"
         android:layout_marginTop="10dp"
         style="@style/TextLabelAppearenceBig"
-        android:text="@string/sign_up"/>
+        android:text="@string/sign_up"
+        android:transitionName="@string/name_transition"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/vEmailInput"
         style="@style/TextInputTheme"
-        app:layout_constraintTop_toBottomOf="@id/tvSignUp"
+        app:layout_constraintTop_toBottomOf="@id/tvSignIn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:transitionName="@string/email_transition">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
+            android:textSize="@dimen/textMiddleSmallSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"/>
@@ -47,12 +51,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/vFirstNameInput"
+        style="@style/TextInputTheme"
         app:layout_constraintTop_toBottomOf="@id/vEmailInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFirstName"
+            android:textSize="@dimen/textMiddleSmallSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
@@ -62,12 +68,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/vLastNameInput"
+        style="@style/TextInputTheme"
         app:layout_constraintTop_toBottomOf="@id/vFirstNameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etLastName"
+            android:textSize="@dimen/textMiddleSmallSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
@@ -77,12 +85,17 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/vPasswordInput"
+        style="@style/TextInputTheme"
         app:layout_constraintTop_toBottomOf="@id/vLastNameInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorAccent"
+        android:transitionName="@string/password_transition">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
+            android:textSize="@dimen/textMiddleSmallSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -92,6 +105,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/vBirthInput"
+        style="@style/TextInputTheme"
         app:layout_constraintTop_toBottomOf="@id/vPasswordInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -99,6 +113,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dpBirth"
             android:hint="@string/birth_date"
+            android:textSize="@dimen/textMiddleSmallSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
@@ -109,6 +124,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/vSexInput"
+        style="@style/TextInputTheme"
         app:layout_constraintTop_toBottomOf="@id/vBirthInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -116,6 +132,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etSex"
             android:focusable="false"
+            android:textSize="@dimen/textMiddleSmallSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/sex"/>
@@ -132,7 +149,8 @@
         android:layout_marginTop="@dimen/standartMargin"
         app:layout_constraintTop_toBottomOf="@id/vSexInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:transitionName="@string/btn_transition"/>
 
     <ProgressBar
         android:id="@+id/pbSigning"
