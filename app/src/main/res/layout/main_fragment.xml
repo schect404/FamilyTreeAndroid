@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/standartPadding"
+    android:background="@drawable/tree_background"
+    tools:context=".presentation.signin.SignInFragment">
+
+    <ImageView
+        android:id="@+id/ivTree"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/logo_tree"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="75dp"/>
+
+    <TextView
+        android:id="@+id/tvSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivTree"
+        android:layout_marginTop="25dp"
+        style="@style/TextLabelAppearenceBig"
+        android:text="@string/sign_in"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vEmailInput"
+        app:layout_constraintTop_toBottomOf="@id/tvSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vPasswordInput"
+        app:layout_constraintTop_toBottomOf="@id/vEmailInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/bSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        style="@style/GreenRoundedButton"
+        android:layout_marginTop="@dimen/standartMargin"
+        app:layout_constraintTop_toBottomOf="@id/vPasswordInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/bForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_password"
+        style="@style/GreenRoundedButton.Borderless"
+        android:layout_marginTop="@dimen/standartMargin"
+        app:layout_constraintTop_toBottomOf="@id/bSignIn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="false"/>
+
+    <Button
+        android:id="@+id/bSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        style="@style/GreenRoundedButton.NoBackground"
+        android:layout_marginTop="@dimen/standartMargin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextLabelAppearenceSmall"
+        android:text="@string/havent_got"
+        app:layout_constraintBottom_toTopOf="@id/bSignUp"
+        android:layout_marginBottom="@dimen/standartMargin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,88 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="TextAccentAppearenceSmall" parent="TextSmall">
+        <item name="android:textColor">@color/colorTextAccent</item>
+    </style>
+
+    <style name="TextLabelAppearenceSmall" parent="TextSmall">
+        <item name="android:textColor">@color/colorTextLabel</item>
+    </style>
+
+    <style name="TextAccentAppearenceMiddle" parent="TextMiddle">
+        <item name="android:textColor">@color/colorTextAccent</item>
+    </style>
+
+    <style name="TextLabelAppearenceMiddle" parent="TextMiddle">
+        <item name="android:textColor">@color/colorTextLabel</item>
+    </style>
+
+    <style name="TextLabelAppearenceBig" parent="TextBig">
+        <item name="android:textColor">@color/colorTextLabel</item>
+    </style>
+
+    <style name="TextSmall" parent="AppTheme">
+        <item name="android:textSize">@dimen/textSmallSize</item>
+    </style>
+
+    <style name="TextMiddle" parent="AppTheme">
+        <item name="android:textSize">@dimen/textMiddleSize</item>
+    </style>
+
+    <style name="TextBig" parent="AppTheme">
+        <item name="android:textSize">@dimen/textBigSize</item>
+    </style>
+
+    <style name="TextErrorAppearance" parent="TextAppearance.Design.Error">
+        <item name="android:textColor">@color/errorRed</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="GreenRoundedButton" parent="@style/Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/transparent</item>
+        <item name="android:backgroundTintMode">src_over</item>
+        <item name="android:background">@drawable/disabling_button_background</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorTextInverse</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:minWidth">183dp</item>
+        <item name="android:padding">@dimen/standartMargin</item>
+    </style>
+
+    <style name="GreenRoundedButton.NoBackground" parent="GreenRoundedButton">
+        <item name="android:background">@drawable/border_button</item>
+        <item name="android:textColor">@color/colorTextLabel</item>
+        <item name="android:minWidth">50dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:paddingStart">@dimen/standartPadding</item>
+        <item name="android:paddingEnd">@dimen/standartPadding</item>
+    </style>
+
+    <style name="GreenRoundedButton.Borderless" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/button_borderless_background</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:minWidth">140dp</item>
+    </style>
+
+    <style name="TextInputTheme" parent="Widget.Design.TextInputLayout">
+        <item name="android:singleLine">true</item>
+        <item name="errorTextAppearance">@style/TextErrorAppearance</item>
+        <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
+        <item name="counterOverflowTextAppearance">@style/TextAppearance.Design.Counter.Overflow</item>
+    </style>
+
+</resources>

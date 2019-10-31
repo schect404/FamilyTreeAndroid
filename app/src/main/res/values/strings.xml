@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Family Tree</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="havent_got">Haven\'t got an account?</string>
+    <string name="email_already_exists">Such email already exists</string>
+    <string name="email_invalid">Email is invalid</string>
+    <string name="password_too_short">Password is too short</string>
+    <string name="sex">Sex</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="already_have_an_account">Already have an account?</string>
+</resources>

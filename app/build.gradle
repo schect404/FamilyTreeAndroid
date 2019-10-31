@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+//apply plugin: 'com.google.gms.google-services'
+
+//apply plugin: 'io.fabric'
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    defaultConfig {
+        applicationId "com.atitto.familytree"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.data
+    implementation deps.domain
+
+    implementation support.appcompat
+    implementation support.design
+    implementation support.constraint
+    implementation support.v4
+
+    implementation deps.lastadapter
+
+//    implementation google.services
+//    implementation google.ads
+//    implementation google.firebase
+//    implementation google.firebaseAds
+//    implementation google.crashlytics
+
+    implementation glide.glide
+
+    implementation kodein.kodein
+    implementation kodein.generic
+
+    implementation rx.java
+    implementation rx.android
+
+    implementation room.rxroom
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    kapt room.compiler
+
+    implementation retrofit.retrofit
+    implementation retrofit.adapterRx
+    implementation retrofit.gson
+    implementation retrofit.adapter
+
+    implementation okhttp.gson
+    implementation okhttp.logging
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
