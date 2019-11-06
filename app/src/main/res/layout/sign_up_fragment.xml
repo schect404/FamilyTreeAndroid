@@ -106,6 +106,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/vBirthInput"
         style="@style/TextInputTheme"
+        android:focusable="false"
+        android:longClickable="false"
         app:layout_constraintTop_toBottomOf="@id/vPasswordInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -117,6 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
+            android:longClickable="false"
             app:layout_constraintTop_toBottomOf="@id/vPasswordInput"
             android:focusable="false" />
 
@@ -125,6 +128,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/vSexInput"
         style="@style/TextInputTheme"
+        android:focusable="false"
+        android:longClickable="false"
         app:layout_constraintTop_toBottomOf="@id/vBirthInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -133,6 +138,7 @@
             android:id="@+id/etSex"
             android:focusable="false"
             android:textSize="@dimen/textMiddleSmallSize"
+            android:longClickable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/sex"/>

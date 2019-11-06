@@ -20,6 +20,8 @@ abstract class BaseFragment: Fragment(), KodeinAware {
 
     abstract val layoutId: Int
 
+    abstract val navigator: BaseNavigator
+
     private val textWatchers = HashMap<Int, TextWatcher>()
 
     override val kodein: Kodein = Kodein.lazy {
@@ -37,8 +39,14 @@ abstract class BaseFragment: Fragment(), KodeinAware {
         return inflater.inflate(layoutId, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navigator.attachFragmentManager(fragmentManager)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        navigator.release()
         textWatchers.entries.forEach { entry ->
             view?.findViewById<TextInputEditText>(entry.key)?.removeTextChangedListener(entry.value)
         }

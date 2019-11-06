@@ -12,5 +12,6 @@ interface RetrofitFactory {
 
 enum class RetrofitVariants {
     WITH_AUTH,
-    WITHOUT_AUTH
+    WITHOUT_AUTH,
+    FOR_SIGN_IN
 }

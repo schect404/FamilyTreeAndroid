@@ -65,6 +65,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
     kapt room.compiler
 
+    implementation 'com.airbnb.android:lottie:3.1.0'
+
     implementation retrofit.retrofit
     implementation retrofit.adapterRx
     implementation retrofit.gson

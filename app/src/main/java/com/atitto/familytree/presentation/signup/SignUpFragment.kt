@@ -9,10 +9,7 @@ import com.atitto.domain.auth.Sex
 import com.atitto.domain.auth.SignUpModel
 import com.atitto.familytree.R
 import com.atitto.familytree.base.BaseFragment
-import com.atitto.familytree.common.bindDataTo
-import com.atitto.familytree.common.gone
-import com.atitto.familytree.common.toSeconds
-import com.atitto.familytree.common.visible
+import com.atitto.familytree.common.*
 import com.atitto.familytree.helpers.DateFormatter
 import com.atitto.familytree.helpers.DialogHelper
 import kotlinx.android.synthetic.main.sign_up_fragment.*
@@ -31,17 +28,13 @@ class SignUpFragment : BaseFragment() {
 
     override val layoutId: Int = R.layout.sign_up_fragment
 
-    private val navigator: SignUpNavigator by kodein.instance()
+    override val navigator: SignUpNavigator by kodein.instance()
 
     private val viewModel: SignUpViewModel by kodein.instance()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bSignIn.setOnClickListener { navigator.goToSignIn() }
+        bSignIn.setOnClickListener { navigator.goToSignIn(ivTree, tvSignIn, vEmailInput, vPasswordInput, bSignUp) }
         registerFieldClicks()
         registerSignUpListener()
         registerTextListeners()
@@ -58,14 +51,13 @@ class SignUpFragment : BaseFragment() {
         bindDataTo(viewModel.passwordErrorLiveData) { actionWithButonHandling { vPasswordInput.error = context().resources.getString(it) } }
         bindDataTo(viewModel.shouldHandleButtonLiveData) { handleButtonAvailable() }
         bindDataTo(viewModel.signUpErrorLiveData) {
-            bSignUp.isEnabled = true
+            bSignUp.enable()
             pbSigning.gone()
             Toast.makeText(context(), it, Toast.LENGTH_SHORT).show()
         }
         bindDataTo(viewModel.signedUpLiveData) {
             pbSigning.gone()
-            Toast.makeText(context(), "Signed up", Toast.LENGTH_SHORT).show()
-            navigator.goToSignIn()
+            navigator.goToSuccess(bSignUp, tvSignIn)
         }
     }
 
@@ -119,7 +111,7 @@ class SignUpFragment : BaseFragment() {
                 )
             )
             pbSigning.visible()
-            bSignUp.isEnabled = false
+            bSignUp.disable()
         }
     }
 

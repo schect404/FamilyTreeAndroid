@@ -14,6 +14,10 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="email_not_found">Email not found</string>
+    <string name="invalid_password">Invalid password</string>
+    <string name="success_sign_up">You are successfully signed up!</string>
+
     <string name="tree_transition">treeTransition</string>
     <string name="email_transition">emailTransition</string>
     <string name="password_transition">passwordTransition</string>

@@ -8,9 +8,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitFactoryImpl : RetrofitFactory {
+class RetrofitFactoryImpl(private val tokenInterceptor: TokenInterceptor) : RetrofitFactory {
 
-    override fun createRetrofit(okHttpClient: OkHttpClient, gson: Gson, variants: RetrofitVariants): Retrofit {
+    override fun createRetrofit(okHttpClient: OkHttpClient, gson: Gson, variant: RetrofitVariants): Retrofit {
 
         val okHttpBuilder =
             okHttpClient.newBuilder()
@@ -19,8 +19,10 @@ class RetrofitFactoryImpl : RetrofitFactory {
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         okHttpBuilder.addInterceptor(loggingInterceptor)
 
+        if(variant == RetrofitVariants.WITH_AUTH) okHttpBuilder.addInterceptor(tokenInterceptor)
+
         val builder = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(if(variant != RetrofitVariants.FOR_SIGN_IN) BuildConfig.BASE_URL else BuildConfig.BASE_URL_SIGN_IN)
             .client(okHttpBuilder.build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

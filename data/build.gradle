@@ -16,6 +16,8 @@ android {
         versionName "1.0"
 
         buildConfigField "String", "BASE_URL", '"https://us-central1-familytree-15872.cloudfunctions.net/"'
+        buildConfigField "String", "BASE_URL_SIGN_IN", '"https://www.googleapis.com/"'
+        buildConfigField "String", "FIREBASE_API_KEY", '"AIzaSyDHJhtPkbtTI8ErC0xL0b8bgvcq0hqHkWs"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
