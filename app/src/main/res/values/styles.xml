@@ -24,7 +24,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowContentTransitions">true</item>
-        <item name="backgroundColor">#181818</item>
+        <item name="backgroundColor">#212121</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
