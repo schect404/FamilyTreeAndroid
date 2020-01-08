@@ -3,6 +3,7 @@ package com.atitto.familytree.presentation.signin
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import com.atitto.familytree.R
 import com.atitto.familytree.base.BaseFragment
 import com.atitto.familytree.common.*
@@ -16,7 +17,7 @@ import java.util.regex.Pattern
 class SignInFragment : BaseFragment() {
 
     override val localModule = Kodein.Module {
-        bind<SignInViewModel>() with provider { MainViewModelImpl(instance()) }
+        bind<SignInViewModel>() with provider { provideViewModelWithFactory { MainViewModelImpl(instance()) } }
         bind<SignInNavigator>() with provider { SignInNavigatorImpl() }
     }
 
@@ -25,6 +26,11 @@ class SignInFragment : BaseFragment() {
     private val viewModel: SignInViewModel by kodein.instance()
 
     override val navigator: SignInNavigator by kodein.instance()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bindViewModel()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,7 +42,6 @@ class SignInFragment : BaseFragment() {
         }
         etPassword.textChangedListener { handleButtonEnable() }
         etEmail.textChangedListener { handleButtonEnable() }
-        bindViewModel()
     }
 
     private fun handleButtonEnable() {

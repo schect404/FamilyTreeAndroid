@@ -7,6 +7,7 @@ import com.atitto.domain.auth.AuthUseCase
 import com.atitto.domain.auth.Sex
 import com.atitto.domain.auth.SignUpModel
 import com.atitto.familytree.R
+import com.atitto.familytree.base.BaseViewModel
 import com.atitto.familytree.common.makeAction
 import com.atitto.familytree.common.subscribeWithDebounce
 import io.reactivex.disposables.CompositeDisposable
@@ -14,26 +15,25 @@ import rx.subjects.PublishSubject
 import java.util.*
 import java.util.regex.Pattern
 
+abstract class SignUpViewModel : BaseViewModel() {
+    abstract val birthDateChangedLiveData: LiveData<Long>
+    abstract val sexChangedLiveData: LiveData<Sex>
+    abstract val emailErrorLiveData: LiveData<Int>
+    abstract val passwordErrorLiveData: LiveData<Int>
+    abstract val shouldHandleButtonLiveData: LiveData<Unit>
+    abstract val signedUpLiveData: LiveData<Unit>
+    abstract val signUpErrorLiveData: LiveData<String>
 
-interface SignUpViewModel {
-    val birthDateChangedLiveData: LiveData<Long>
-    val sexChangedLiveData: LiveData<Sex>
-    val emailErrorLiveData: LiveData<Int>
-    val passwordErrorLiveData: LiveData<Int>
-    val shouldHandleButtonLiveData: LiveData<Unit>
-    val signedUpLiveData: LiveData<Unit>
-    val signUpErrorLiveData: LiveData<String>
-
-    fun changeBirthDate(day: Int, month: Int, year: Int)
-    fun changeSex(sex: Sex)
-    fun changeEmail(email: String)
-    fun changePassword(password: String)
-    fun listenEmail()
-    fun listenPassword()
-    fun signUp(data: SignUpModel)
+    abstract fun changeBirthDate(day: Int, month: Int, year: Int)
+    abstract fun changeSex(sex: Sex)
+    abstract fun changeEmail(email: String)
+    abstract fun changePassword(password: String)
+    abstract fun listenEmail()
+    abstract fun listenPassword()
+    abstract fun signUp(data: SignUpModel)
 }
 
-class SignUpViewModelImpl(private val authUseCase: AuthUseCase) : ViewModel(), SignUpViewModel {
+class SignUpViewModelImpl(private val authUseCase: AuthUseCase) : SignUpViewModel() {
 
     override val birthDateChangedLiveData: MutableLiveData<Long> = MutableLiveData()
     override val sexChangedLiveData: MutableLiveData<Sex> = MutableLiveData()
@@ -45,8 +45,6 @@ class SignUpViewModelImpl(private val authUseCase: AuthUseCase) : ViewModel(), S
 
     private val emailChangedSubject: PublishSubject<String> = PublishSubject.create()
     private val passwordChangedSubject: PublishSubject<String> = PublishSubject.create()
-
-    private val compositeDisposable = CompositeDisposable()
 
     override fun changeBirthDate(day: Int, month: Int, year: Int) {
         val date = Calendar.getInstance().apply {
@@ -63,8 +61,10 @@ class SignUpViewModelImpl(private val authUseCase: AuthUseCase) : ViewModel(), S
 
     override fun listenEmail() {
         emailChangedSubject.subscribeWithDebounce {
-            if(isEmailValid(it)) compositeDisposable.makeAction(authUseCase.checkEmail(it), { emailErrorLiveData.postValue(R.string.email_already_exists) }) {
-                shouldHandleButtonLiveData.postValue(Unit)
+            if(isEmailValid(it)) {
+                authUseCase.checkEmail(it).makeAction(shouldHandleButtonLiveData) {
+                    emailErrorLiveData.postValue(R.string.email_already_exists)
+                }
             }
             else emailErrorLiveData.postValue(R.string.email_invalid)
         }
@@ -80,17 +80,12 @@ class SignUpViewModelImpl(private val authUseCase: AuthUseCase) : ViewModel(), S
     override fun changePassword(password: String) = passwordChangedSubject.onNext(password)
 
     override fun signUp(data: SignUpModel) {
-        compositeDisposable.makeAction(authUseCase.signUp(data), signUpErrorLiveData) { signedUpLiveData.postValue(Unit) }
+        authUseCase.signUp(data).makeAction(signedUpLiveData, signUpErrorLiveData)
     }
 
     private fun isEmailValid(email: String): Boolean {
         val pattern = Pattern.compile(EMAIL_PATTERN)
         return pattern.matcher(email).matches()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
     }
 
     companion object {

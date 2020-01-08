@@ -22,7 +22,7 @@ import java.util.*
 class SignUpFragment : BaseFragment() {
 
     override val localModule = Kodein.Module {
-        bind<SignUpViewModel>() with provider { SignUpViewModelImpl(instance()) }
+        bind<SignUpViewModel>() with provider { provideViewModelWithFactory { SignUpViewModelImpl(instance()) } }
         bind<SignUpNavigator>() with provider { SignUpNavigatorImpl() }
     }
 
@@ -32,23 +32,26 @@ class SignUpFragment : BaseFragment() {
 
     private val viewModel: SignUpViewModel by kodein.instance()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bindViewModel()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bSignIn.setOnClickListener { navigator.goToSignIn(ivTree, tvSignIn, vEmailInput, vPasswordInput, bSignUp) }
         registerFieldClicks()
         registerSignUpListener()
         registerTextListeners()
-        bindViewModel()
-        navigator.attachFragmentManager(fragmentManager)
+        viewModel.listenEmail()
+        viewModel.listenPassword()
     }
 
     private fun bindViewModel() {
-        viewModel.listenEmail()
-        viewModel.listenPassword()
-        bindDataTo(viewModel.birthDateChangedLiveData) { actionWithButonHandling { dpBirth.setText(DateFormatter.defaultDateFormat.format(Date(it))) } }
-        bindDataTo(viewModel.sexChangedLiveData) { actionWithButonHandling { etSex.setText(it.title) } }
-        bindDataTo(viewModel.emailErrorLiveData) { actionWithButonHandling { vEmailInput.error = context().resources.getString(it) } }
-        bindDataTo(viewModel.passwordErrorLiveData) { actionWithButonHandling { vPasswordInput.error = context().resources.getString(it) } }
+        bindDataTo(viewModel.birthDateChangedLiveData) { actionWithButtonHandling { dpBirth.setText(DateFormatter.defaultDateFormat.format(Date(it))) } }
+        bindDataTo(viewModel.sexChangedLiveData) { actionWithButtonHandling { etSex.setText(it.title) } }
+        bindDataTo(viewModel.emailErrorLiveData) { actionWithButtonHandling { vEmailInput.error = context().resources.getString(it) } }
+        bindDataTo(viewModel.passwordErrorLiveData) { actionWithButtonHandling { vPasswordInput.error = context().resources.getString(it) } }
         bindDataTo(viewModel.shouldHandleButtonLiveData) { handleButtonAvailable() }
         bindDataTo(viewModel.signUpErrorLiveData) {
             bSignUp.enable()
@@ -61,7 +64,7 @@ class SignUpFragment : BaseFragment() {
         }
     }
 
-    private fun actionWithButonHandling(action: () -> Unit) {
+    private fun actionWithButtonHandling(action: () -> Unit) {
         action.invoke()
         handleButtonAvailable()
     }

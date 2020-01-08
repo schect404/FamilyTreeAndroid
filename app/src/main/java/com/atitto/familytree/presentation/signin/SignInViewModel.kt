@@ -8,16 +8,16 @@ import com.atitto.familytree.common.makeAction
 import com.google.gson.JsonParser
 import retrofit2.HttpException
 
-interface SignInViewModel {
-    val successfulSignInLiveData: LiveData<String>
-    val errorSignInLiveData: LiveData<Unit>
-    val emailErrorLiveData: LiveData<Unit>
-    val passwordErrorLiveData: LiveData<Unit>
+abstract class SignInViewModel : BaseViewModel() {
+    abstract val successfulSignInLiveData: LiveData<String>
+    abstract val errorSignInLiveData: LiveData<Unit>
+    abstract val emailErrorLiveData: LiveData<Unit>
+    abstract val passwordErrorLiveData: LiveData<Unit>
 
-    fun signIn(email: String, password: String)
+    abstract fun signIn(email: String, password: String)
 }
 
-class MainViewModelImpl(private val authUseCase: AuthUseCase): BaseViewModel(), SignInViewModel {
+class MainViewModelImpl(private val authUseCase: AuthUseCase): SignInViewModel() {
 
     override val successfulSignInLiveData: MutableLiveData<String> = MutableLiveData()
     override val errorSignInLiveData: MutableLiveData<Unit> = MutableLiveData()
@@ -25,10 +25,10 @@ class MainViewModelImpl(private val authUseCase: AuthUseCase): BaseViewModel(), 
     override val passwordErrorLiveData: MutableLiveData<Unit> = MutableLiveData()
 
     override fun signIn(email: String, password: String) {
-        disposer.makeAction(authUseCase.signIn(email, password), ::handleError) {
+        authUseCase.signIn(email, password).getInfo({
             authUseCase.storeTokens(it)
             successfulSignInLiveData.postValue(it.userId)
-        }
+        },::handleError)
     }
 
     private fun handleError(error: Throwable) {

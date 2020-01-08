@@ -46,3 +46,19 @@ fun FragmentManager.goWithAnimation(targetFragment: Fragment, vararg sharedViews
     .commit()
 
 }
+
+fun FragmentManager.goWithAnimationAndBack(targetFragment: Fragment, vararg sharedViews: View) {
+
+    val previousFragment = findFragmentById(R.id.container) ?: return
+    previousFragment.animateExit()
+
+    targetFragment.animateShared(previousFragment.requireContext())
+    //targetFragment.animateEnter()
+
+    beginTransaction()
+        .replace(R.id.container, targetFragment)
+        .apply { sharedViews.forEach { addSharedElement(it, it.transitionName) } }
+        .addToBackStack(targetFragment::class.java.name)
+        .commit()
+
+}

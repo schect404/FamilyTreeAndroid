@@ -2,6 +2,7 @@ package com.atitto.familytree.base
 
 import android.app.Application
 import android.content.Context
+import android.content.res.Configuration
 import com.atitto.data.di.dataModule
 import com.atitto.domain.di.domainModule
 import org.kodein.di.Kodein
@@ -17,4 +18,12 @@ class App: Application(), KodeinAware {
         bind<Context>() with provider { this@App }
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+    }
+
+    companion object {
+        var instance: App? = null
+    }
 }
