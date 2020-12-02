@@ -2,6 +2,7 @@ package com.atitto.datashared.ktor
 
 import com.atitto.datashared.model.RefreshToken
 import com.atitto.datashared.model.TokenResponse
+import com.atitto.mvi_kmm.base.BaseActor
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -21,7 +22,6 @@ class KtorClientProviderImpl(val persistProvider: PersistProvider): KtorClientPr
     }
 
     private suspend fun refresh() {
-        val actor: BaseActor
         val token = persistProvider.getRefreshToken()
         val refreshBody = RefreshToken(token)
         val response = clientRefresh.post<TokenResponse>(URL_REFRESH) {

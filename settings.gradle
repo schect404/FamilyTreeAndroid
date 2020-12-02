@@ -1,3 +1,4 @@
 include ':dataShared'
 include ':app', ':data', ':domain'
 rootProject.name='FamilyTree'
+enableFeaturePreview("GRADLE_METADATA")

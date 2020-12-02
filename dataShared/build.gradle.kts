@@ -15,7 +15,7 @@ repositories {
     maven("https://dl.bintray.com/jetbrains/kotlin-native-dependencies")
     maven("https://dl.bintray.com/kotlin/kotlin-eap")
     maven("https://plugins.gradle.org/m2/")
-    maven("https://dl.bintray.com/schect404/MviFlowCore")
+    maven("https://atitto.jfrog.io/artifactory/MviFlowCore")
 }
 
 kotlin {
@@ -28,8 +28,7 @@ kotlin {
         implementation("io.ktor:ktor-client-json:1.4.2")
         implementation("io.ktor:ktor-client-serialization:1.4.2")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
-        implementation("com.github.schect404.MviFlowCore:mviKmm:1.4.1")
-        implementation("com.attito.mvicore:kmm:1.1")
+        api("com.atitto.MviFlowCore:mviKmm:0.1-all")
     }
     sourceSets["androidMain"].dependencies {
         implementation("io.ktor:ktor-client-android:1.4.2")
